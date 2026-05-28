@@ -4,7 +4,7 @@ import { StepProps } from './types';
 import { Input, TextArea } from './Input';
 import { CardCheckbox } from './CardCheckbox';
 import { Button } from './Button';
-import { ArrowLeft, ArrowRight, CheckCircle2, TrendingUp, Presentation, Send } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, TrendingUp, Presentation, Send } from 'lucide-react';
 import { motion } from 'motion/react';
 
 // --- Step 3: Dynamic Area Details ---
@@ -34,7 +34,7 @@ export function StepDynamicArea({ formData, updateData, nextStep, prevStep, area
 
       <div className="space-y-8">
         <div>
-           <h3 className="text-lg font-medium text-white mb-3 flex items-center"><CheckCircle2 className="w-5 h-5 mr-2 text-[#00E5FF]" /> Serviços de interesse</h3>
+           <h3 className="text-lg font-medium text-white mb-3 flex items-center"><Check className="w-5 h-5 mr-2 text-[#00E5FF]" /> Serviços de interesse</h3>
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
              {dataList.services.map(srv => (
                <CardCheckbox key={srv} label={srv} checked={currentServices.includes(srv)} onChange={() => toggleService(srv)} />
@@ -136,7 +136,7 @@ export function StepSuccess({ formData }: { formData?: any }) {
   return (
     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10 space-y-8">
       <div className="w-24 h-24 mx-auto rounded-full bg-[#00E5FF]/20 flex items-center justify-center border-2 border-[#00E5FF]">
-        <CheckCircle2 className="w-12 h-12 text-[#00E5FF]" />
+        <Check className="w-12 h-12 text-[#00E5FF]" />
       </div>
       
       <div className="space-y-4">
