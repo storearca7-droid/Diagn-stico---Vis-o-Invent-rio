@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Lead } from '../data';
+import { Lead, SERVICES_BY_AREA } from '../data';
 import { StepIntro, StepCompany, StepAreas } from '../components/LeadSteps';
 import { StepDynamicArea, StepFinal, StepSuccess } from '../components/LeadStepsPart2';
 
@@ -25,7 +25,9 @@ export default function Home() {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
-  const dynamicAreas = formData.areasOfInterest;
+  const dynamicAreas = useMemo(() => {
+    return formData.areasOfInterest.filter(area => !!SERVICES_BY_AREA[area]);
+  }, [formData.areasOfInterest]);
   
   // Total steps: Intro (0), Company (1), Areas (2), dynamicAreas.length (3..), Final (+1), Success (+2)
   const totalSteps = 3 + dynamicAreas.length + 1; // 3 base steps + dynamic + final. Success isn't a "step" we go back from usually, but let's count it for progress.
