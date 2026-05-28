@@ -23,7 +23,7 @@ export function Input({ label, className, id, ...props }: InputProps) {
   );
 }
 
-export function TextArea({ label, className, id, ...props }: InputHTMLAttributes<HTMLTextAreaElement> & { label: string }) {
+export function TextArea({ label, className, id, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement> & { label: string }) {
   return (
     <div className="flex flex-col gap-1 w-full">
       <label htmlFor={id} className="text-sm font-medium text-slate-300">

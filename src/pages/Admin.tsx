@@ -33,8 +33,8 @@ export default function Admin() {
     // Data rows
     leads.forEach(lead => {
       // Flatten complex objects
-      const servicesConcat = Object.entries(lead.services).map(([area, svcs]) => `${area}: [${svcs.join(' | ')}]`).join('; ');
-      const painsConcat = Object.entries(lead.painPoints).map(([area, pains]) => `${area}: [${pains.join(' | ')}]`).join('; ');
+      const servicesConcat = Object.entries(lead.services || {}).map(([area, svcs]) => `${area}: [${(svcs || []).join(' | ')}]`).join('; ');
+      const painsConcat = Object.entries(lead.painPoints || {}).map(([area, pains]) => `${area}: [${(pains || []).join(' | ')}]`).join('; ');
       
       const row = [
         lead.id || '',

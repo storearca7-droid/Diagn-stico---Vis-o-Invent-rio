@@ -4,7 +4,7 @@ import { StepProps } from './types';
 import { Input, TextArea } from './Input';
 import { CardCheckbox } from './CardCheckbox';
 import { Button } from './Button';
-import { ArrowLeft, ArrowRight, Check, TrendingUp, BarChart, Presentation, Send } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, TrendingUp, Send } from 'lucide-react';
 import { motion } from 'motion/react';
 
 // --- Step 0: Intro ---

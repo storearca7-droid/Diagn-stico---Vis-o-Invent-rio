@@ -1,7 +1,7 @@
 import React from 'react';
 import { Lead } from '../data';
 
-interface StepProps {
+export interface StepProps {
   formData: Lead;
   updateData: (data: Partial<Lead>) => void;
   nextStep: () => void;
