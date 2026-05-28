@@ -1,0 +1,6 @@
+{
+  "name": "Diagnóstico Inventário Visão",
+  "description": "Aplicativo de captação de leads e diagnóstico empresarial para supermercados e operações de varejo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
