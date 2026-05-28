@@ -38,14 +38,12 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      if (res.ok) {
-        setStepIndex(stepIndex + 1); // move to success
-      } else {
-        alert("Erro ao enviar dados. Tente novamente.");
-      }
+      // Always proceed to next step even if backend API fails, since it's hosted statically
+      setStepIndex(stepIndex + 1);
     } catch (e) {
       console.error(e);
-      alert("Erro ao enviar dados.");
+      // Still proceed because the user wants WhatsApp fallback if pure static
+      setStepIndex(stepIndex + 1);
     } finally {
       setIsSubmitting(false);
     }
@@ -81,7 +79,7 @@ export default function Home() {
     }
 
     // Success step (dynamicOffset > dynamicAreas.length)
-    return <StepSuccess />;
+    return <StepSuccess formData={formData} />;
   };
 
   // Skip progress bar on intro and success screens

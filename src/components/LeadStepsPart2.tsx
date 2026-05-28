@@ -95,7 +95,44 @@ export function StepFinal({ formData, updateData, prevStep, onSubmit, isSubmitti
 }
 
 // --- Success Step ---
-export function StepSuccess() {
+export function StepSuccess({ formData }: { formData?: any }) {
+  let waLink = "https://wa.me/5571983032979?text=Ol%C3%A1,%20acabei%20de%20preencher%20o%20diagn%C3%B3stico%20inteligente.";
+  
+  if (formData) {
+     let text = `*NOVO DIAGNÓSTICO - INVENTÁRIO VISÃO*\n\n`;
+     text += `*Empresa:* ${formData.companyName}\n`;
+     text += `*Contato:* ${formData.contactName}\n`;
+     text += `*WhatsApp:* ${formData.whatsapp}\n`;
+     if (formData.email) text += `*E-mail:* ${formData.email}\n`;
+     text += `*Local:* ${formData.city}/${formData.state}\n`;
+     text += `*Segmentos:* ${formData.segments.join(', ')}\n\n`;
+     
+     if (formData.areasOfInterest && formData.areasOfInterest.length > 0) {
+       text += `*Áreas de Interesse:*\n- ${formData.areasOfInterest.join('\n- ')}\n\n`;
+     }
+     
+     if (formData.services) {
+       Object.keys(formData.services).forEach(area => {
+         if (formData.services[area] && formData.services[area].length > 0) {
+           text += `*Serviços (${area}):*\n- ${formData.services[area].join('\n- ')}\n\n`;
+         }
+       });
+     }
+     
+     if (formData.painPoints) {
+       Object.keys(formData.painPoints).forEach(area => {
+         if (formData.painPoints[area] && formData.painPoints[area].length > 0) {
+           text += `*Dores (${area}):*\n- ${formData.painPoints[area].join('\n- ')}\n\n`;
+         }
+       });
+     }
+     
+     if (formData.biggestChallenge) {
+       text += `*Maior Desafio:*\n${formData.biggestChallenge}\n`;
+     }
+     waLink = `https://wa.me/5571983032979?text=${encodeURIComponent(text)}`;
+  }
+
   return (
     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10 space-y-8">
       <div className="w-24 h-24 mx-auto rounded-full bg-[#00E5FF]/20 flex items-center justify-center border-2 border-[#00E5FF]">
@@ -103,16 +140,16 @@ export function StepSuccess() {
       </div>
       
       <div className="space-y-4">
-        <h2 className="text-4xl font-bold text-white">Diagnóstico enviado com sucesso!</h2>
+        <h2 className="text-4xl font-bold text-white">Diagnóstico detalhado gerado!</h2>
         <p className="text-lg text-slate-400 max-w-md mx-auto">
-          Nossa equipe irá analisar suas informações e entrar em contato com uma solução personalizada para sua operação.
+          Clique no botão abaixo para nos enviar todas as informações do seu diagnóstico pelo WhatsApp. Nossa equipe receberá seus dados e retornará com uma solução personalizada.
         </p>
       </div>
 
       <div className="bg-[#001D36] border border-[#003366] rounded-xl p-6 inline-block text-left w-full max-w-sm">
         <div className="space-y-4">
-          <a href="https://wa.me/5571983032979?text=Olá,%20acabei%20de%20preencher%20o%20diagnóstico%20inteligente." target="_blank" rel="noreferrer" className="block w-full text-center px-4 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-lg transition-colors">
-            📲 Falar no WhatsApp
+          <a href={waLink} target="_blank" rel="noreferrer" className="block w-full text-center px-4 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-lg transition-colors">
+            📲 Enviar Dados no WhatsApp
           </a>
           <div className="flex justify-between text-sm text-slate-400 pt-2 border-t border-[#003366]">
             <span>Instagram:</span>
