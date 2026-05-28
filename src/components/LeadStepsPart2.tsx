@@ -87,7 +87,7 @@ export function StepFinal({ formData, updateData, prevStep, onSubmit, isSubmitti
           <ArrowLeft className="w-5 h-5 mr-2" /> Voltar
         </Button>
         <Button onClick={onSubmit} disabled={isSubmitting || !formData.biggestChallenge.trim()}>
-          {isSubmitting ? "Enviando..." : "Enviar Diagnóstico"} <Send className="w-5 h-5 ml-2" />
+          {isSubmitting ? "Redirecionando..." : "Enviar Diagnóstico"} <Send className="w-5 h-5 ml-2" />
         </Button>
       </div>
     </motion.div>
@@ -140,9 +140,9 @@ export function StepSuccess({ formData }: { formData?: any }) {
       </div>
       
       <div className="space-y-4">
-        <h2 className="text-4xl font-bold text-white">Diagnóstico detalhado gerado!</h2>
+        <h2 className="text-4xl font-bold text-white">Redirecionando para o WhatsApp...</h2>
         <p className="text-lg text-slate-400 max-w-md mx-auto">
-          Clique no botão abaixo para nos enviar todas as informações do seu diagnóstico pelo WhatsApp. Nossa equipe receberá seus dados e retornará com uma solução personalizada.
+          Caso você não tenha sido redirecionado automaticamente, clique no botão abaixo para falar com nossa equipe e receber uma solução personalizada.
         </p>
       </div>
 

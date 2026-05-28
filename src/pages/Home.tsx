@@ -32,23 +32,60 @@ export default function Home() {
   // Total steps: Intro (0), Company (1), Areas (2), dynamicAreas.length (3..), Final (+1), Success (+2)
   const totalSteps = 3 + dynamicAreas.length + 1; // 3 base steps + dynamic + final. Success isn't a "step" we go back from usually, but let's count it for progress.
   
-  const submitLead = async () => {
+  const submitLead = () => {
     setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      // Always proceed to next step even if backend API fails, since it's hosted statically
-      setStepIndex(stepIndex + 1);
-    } catch (e) {
-      console.error(e);
-      // Still proceed because the user wants WhatsApp fallback if pure static
-      setStepIndex(stepIndex + 1);
-    } finally {
-      setIsSubmitting(false);
+    
+    // Fire and forget, don't await to keep click handler synchronous for window.open
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    }).catch(e => console.error(e));
+
+    let text = `*NOVO DIAGNÓSTICO - INVENTÁRIO VISÃO*\n\n`;
+    text += `*Empresa:* ${formData.companyName}\n`;
+    text += `*Contato:* ${formData.contactName}\n`;
+    text += `*WhatsApp:* ${formData.whatsapp}\n`;
+    if (formData.email) text += `*E-mail:* ${formData.email}\n`;
+    text += `*Local:* ${formData.city}/${formData.state}\n`;
+    text += `*Segmentos:* ${formData.segments.join(', ')}\n\n`;
+    
+    if (formData.areasOfInterest && formData.areasOfInterest.length > 0) {
+      text += `*Áreas de Interesse:*\n- ${formData.areasOfInterest.join('\n- ')}\n\n`;
     }
+    
+    if (formData.services) {
+      Object.keys(formData.services).forEach(area => {
+        if (formData.services[area] && formData.services[area].length > 0) {
+          text += `*Serviços (${area}):*\n- ${formData.services[area].join('\n- ')}\n\n`;
+        }
+      });
+    }
+    
+    if (formData.painPoints) {
+      Object.keys(formData.painPoints).forEach(area => {
+        if (formData.painPoints[area] && formData.painPoints[area].length > 0) {
+          text += `*Dores (${area}):*\n- ${formData.painPoints[area].join('\n- ')}\n\n`;
+        }
+      });
+    }
+    
+    if (formData.biggestChallenge) {
+      text += `*Maior Desafio:*\n${formData.biggestChallenge}\n`;
+    }
+    
+    const waLink = `https://wa.me/5571983032979?text=${encodeURIComponent(text)}`;
+    
+    // Open WhatsApp in a new tab directly in the click handler
+    window.open(waLink, '_blank');
+    
+    // Advance to Success screen so if they return to this tab, they see it completed
+    setStepIndex(stepIndex + 1);
+    
+    // Reset the button state after a short delay in case user goes back to the tab
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1500);
   };
 
   const renderStep = () => {
