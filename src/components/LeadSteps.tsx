@@ -24,30 +24,12 @@ export function StepIntro({ nextStep }: { nextStep: () => void }) {
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
           Diagnóstico Inteligente <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-blue-400">para o Seu Negócio</span>
         </h1>
-        <p className="text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
+        <p className="text-lg text-slate-400 max-w-xl mx-auto leading-relaxed mt-4 mb-4">
           Descubra onde sua empresa está perdendo dinheiro e como a <strong className="text-white">Inventário Visão</strong> pode ajudar a sua operação.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full py-8 text-left">
-         <div className="bg-[#001D36] border border-[#003366] p-5 rounded-2xl">
-           <BarChart3 className="w-8 h-8 text-[#00E5FF] mb-3" />
-           <h3 className="text-white font-semibold mb-1">Dados Claros</h3>
-           <p className="text-sm text-slate-400">Identifique gargalos na operação</p>
-         </div>
-         <div className="bg-[#001D36] border border-[#003366] p-5 rounded-2xl">
-           <TrendingUp className="w-8 h-8 text-[#00E5FF] mb-3" />
-           <h3 className="text-white font-semibold mb-1">Evite Perdas</h3>
-           <p className="text-sm text-slate-400">Otimize estoque e reduza rupturas</p>
-         </div>
-         <div className="bg-[#001D36] border border-[#003366] p-5 rounded-2xl">
-           <Presentation className="w-8 h-8 text-[#00E5FF] mb-3" />
-           <h3 className="text-white font-semibold mb-1">Crescimento</h3>
-           <p className="text-sm text-slate-400">Gestão estratégica focada e lucrativa</p>
-         </div>
-      </div>
-
-      <Button onClick={nextStep} className="w-full sm:w-auto px-10 text-lg">
+      <Button onClick={nextStep} className="w-full sm:w-auto px-10 text-lg mt-8">
         Começar Diagnóstico <ArrowRight className="w-5 h-5 ml-2" />
       </Button>
     </motion.div>
